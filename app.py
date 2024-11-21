@@ -4,10 +4,11 @@ import os
 
 # Tải mô hình và tokenizer từ Hugging Face
 token = os.getenv("HF_TOKEN")
+print('token: ', token)
 @st.cache_resource
 def load_model():
-    tokenizer = AutoTokenizer.from_pretrained("VietAI/vit5-base-vietnamese-summarization", use_auth_token=token)
-    model = AutoModelForSeq2SeqLM.from_pretrained("VietAI/vit5-base-vietnamese-summarization", use_auth_token=token)
+    tokenizer = AutoTokenizer.from_pretrained("VietAI/vit5-base-vietnamese-summarization", token=token)
+    model = AutoModelForSeq2SeqLM.from_pretrained("VietAI/vit5-base-vietnamese-summarization", token=token)
     return tokenizer, model
 
 # Hàm xử lý văn bản dài
