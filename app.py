@@ -1,11 +1,13 @@
 import streamlit as st
 from transformers import AutoTokenizer, AutoModelForSeq2SeqLM
+import os
 
 # Tải mô hình và tokenizer từ Hugging Face
+token = os.getenv("HF_TOKEN")
 @st.cache_resource
 def load_model():
-    tokenizer = AutoTokenizer.from_pretrained("VietAI/vit5-base-vietnamese-summarization")
-    model = AutoModelForSeq2SeqLM.from_pretrained("VietAI/vit5-base-vietnamese-summarization")
+    tokenizer = AutoTokenizer.from_pretrained("VietAI/vit5-base-vietnamese-summarization", use_auth_token=token)
+    model = AutoModelForSeq2SeqLM.from_pretrained("VietAI/vit5-base-vietnamese-summarization", use_auth_token=token)
     return tokenizer, model
 
 # Hàm xử lý văn bản dài
